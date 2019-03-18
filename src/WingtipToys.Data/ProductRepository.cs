@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -20,9 +21,9 @@ namespace WingtipToys.Data
         }
 
 
-        public async Task<IPageResult<Product>> GetProductsForCategoryAsync(int categoryID, int pageNo = 1, int pageSize = 20, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<IPageResult<Product>> GetProductsForCategoryAsync(int categoryID = 1, int pageNo = 1, int pageSize = 20, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var result = await _dbContext.Products.Where(p => p.CategoryId == categoryID).ToPagedResultAsync(pageNo, pageSize,cancellationToken);
+            var result = await _dbContext.Products.AsNoTracking().Where(p => p.CategoryId == categoryID).ToPagedResultAsync(pageNo, pageSize,cancellationToken);
             return result;
         }
     }
