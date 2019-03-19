@@ -77,8 +77,7 @@ namespace WingtipToys.Data.Tests
             CancellationToken cancellationToken = default(CancellationToken);
 
             var repo = new ProductRepository(_context);
-            await Assert.ThrowsAsync(exceptionType,() => { return repo.GetProductsForCategoryAsync(categoryID, pageNo, pageSize, cancellationToken); });
-            
+            await Assert.ThrowsAsync(exceptionType,() => { return repo.GetProductsForCategoryAsync(categoryID, pageNo, pageSize, cancellationToken); });            
         }
     }
 }
